@@ -25,6 +25,9 @@
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
                     <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Usuario", "Index", "Usuarios")</li>
+                    <li>@Html.ActionLink("vehiculo", "Index", "vehiculoes")</li>
+                    <li>@Html.ActionLink("Tipo Vehiculo", "Index", "tipovehiculoes")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -34,7 +37,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+            <p>&copy; @DateTime.Now.Year - MI estacionamiento O.R.G. GT.</p>
         </footer>
     </div>
 
