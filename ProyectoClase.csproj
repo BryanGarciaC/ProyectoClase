@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -112,12 +120,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -162,6 +164,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administrador.cs">
+      <DependentUpon>ModeloProyectoClase.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -170,14 +175,53 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PagoesController.cs" />
+    <Compile Include="Controllers\ParqueosController.cs" />
+    <Compile Include="Controllers\RegistroesController.cs" />
+    <Compile Include="Controllers\tipovehiculoesController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Controllers\VehiculoesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloProyectoClase.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloProyectoClase.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloProyectoClase.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloProyectoClase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloProyectoClase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloProyectoClase.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Pago.cs">
+      <DependentUpon>ModeloProyectoClase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Parqueo.cs">
+      <DependentUpon>ModeloProyectoClase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registro.cs">
+      <DependentUpon>ModeloProyectoClase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="tipovehiculo.cs">
+      <DependentUpon>ModeloProyectoClase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario.cs">
+      <DependentUpon>ModeloProyectoClase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Vehiculo.cs">
+      <DependentUpon>ModeloProyectoClase.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -188,8 +232,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="ModeloProyectoClase.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloProyectoClase.edmx</DependentUpon>
+      <LastGenOutput>ModeloProyectoClase.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModeloProyectoClase.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloProyectoClase.edmx</DependentUpon>
+      <LastGenOutput>ModeloProyectoClase.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="ModeloProyectoClase.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModeloProyectoClase.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ModeloProyectoClase.edmx.diagram">
+      <DependentUpon>ModeloProyectoClase.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -235,6 +296,36 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Usuarios\Create.cshtml" />
+    <Content Include="Views\Usuarios\Delete.cshtml" />
+    <Content Include="Views\Usuarios\Details.cshtml" />
+    <Content Include="Views\Usuarios\Edit.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Vehiculoes\Create.cshtml" />
+    <Content Include="Views\Vehiculoes\Delete.cshtml" />
+    <Content Include="Views\Vehiculoes\Details.cshtml" />
+    <Content Include="Views\Vehiculoes\Edit.cshtml" />
+    <Content Include="Views\Vehiculoes\Index.cshtml" />
+    <Content Include="Views\tipovehiculoes\Create.cshtml" />
+    <Content Include="Views\tipovehiculoes\Delete.cshtml" />
+    <Content Include="Views\tipovehiculoes\Details.cshtml" />
+    <Content Include="Views\tipovehiculoes\Edit.cshtml" />
+    <Content Include="Views\tipovehiculoes\Index.cshtml" />
+    <Content Include="Views\Registroes\Create.cshtml" />
+    <Content Include="Views\Registroes\Delete.cshtml" />
+    <Content Include="Views\Registroes\Details.cshtml" />
+    <Content Include="Views\Registroes\Edit.cshtml" />
+    <Content Include="Views\Registroes\Index.cshtml" />
+    <Content Include="Views\Pagoes\Create.cshtml" />
+    <Content Include="Views\Pagoes\Delete.cshtml" />
+    <Content Include="Views\Pagoes\Details.cshtml" />
+    <Content Include="Views\Pagoes\Edit.cshtml" />
+    <Content Include="Views\Pagoes\Index.cshtml" />
+    <Content Include="Views\Parqueos\Create.cshtml" />
+    <Content Include="Views\Parqueos\Delete.cshtml" />
+    <Content Include="Views\Parqueos\Details.cshtml" />
+    <Content Include="Views\Parqueos\Edit.cshtml" />
+    <Content Include="Views\Parqueos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -251,6 +342,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
